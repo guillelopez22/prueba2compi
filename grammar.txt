@@ -3,8 +3,10 @@ Grammar
 
 input -> stmt_list
 
-stmt_list -> stmt_list ; stmt ;
-            | stmt
+stmt_list -> stmt stmt_list'
+
+stmt_list' -> ; stmt ; stmt_list'
+	     | lambda
 
 stmt -> assign
         | PRINT expr
@@ -17,11 +19,15 @@ fun_decl -> IDENT ( arg ) = expr
 arg -> NUMBER
       | IDENT
 
-expr ->   expr + term
-        | term
+expr -> term expr'
 
-term -> term * factor
-        | factor
+expr' -> + term expr'
+	| lambda
+
+term -> factor term'
+
+term' -> * factor term'
+	| lambda
 
 factor -> IDENT
         | NUMBER
