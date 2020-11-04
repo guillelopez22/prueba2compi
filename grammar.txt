@@ -6,7 +6,7 @@ input -> stmt_list
 stmt_list -> stmt stmt_list'
 
 stmt_list' -> ; stmt ; stmt_list'
-	     | lambda
+	     | e
 
 stmt -> assign
         | PRINT expr
@@ -22,12 +22,12 @@ arg -> NUMBER
 expr -> term expr'
 
 expr' -> + term expr'
-	| lambda
+	| e
 
 term -> factor term'
 
 term' -> * factor term'
-	| lambda
+	| e
 
 factor -> IDENT
         | NUMBER
